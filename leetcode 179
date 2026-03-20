@@ -1,0 +1,16 @@
+from functools import cmp_to_key
+
+def largestNumber(nums):
+    nums = [str(n) for n in nums]
+    
+    def compare(n1, n2):
+        if n1 + n2 > n2 + n1:
+            return -1 # n1 comes first
+        else:
+            return 1  # n2 comes first
+            
+    nums.sort(key=cmp_to_key(compare))
+
+    result = "".join(nums)
+    
+    return "0" if result[0] == "0" else result
