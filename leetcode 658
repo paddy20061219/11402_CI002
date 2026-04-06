@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        vector<int> sorted_arr = arr;
+        
+        sort(sorted_arr.begin(), sorted_arr.end(), [x](int a, int b) {
+            int distA = abs(a - x);
+            int distB = abs(b - x);
+            
+            if (distA != distB) {
+                return distA < distB; 
+            }
+            return a < b;
+        });
+
+        vector<int> res;
+        for (int i = 0; i < k; i++) {
+            res.push_back(sorted_arr[i]);
+        }
+        
+        sort(res.begin(), res.end());
+        
+        return res;
+    }
+};
