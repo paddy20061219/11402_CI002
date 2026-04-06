@@ -1,10 +1,7 @@
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        # 法一：最直觀的集合運算 (推薦)
-        # 時間複雜度: O(m + n)，空間複雜度: O(m + n)
         return list(set(nums1) & set(nums2))
 
-    # 法二：手寫邏輯 (適合面試說明)
     def intersection_manual(self, nums1: List[int], nums2: List[int]) -> List[int]:
         set1 = set(nums1)
         res = set()
