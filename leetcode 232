@@ -1,0 +1,38 @@
+class MyQueue {
+private:
+    stack<int> pushStk;  
+    stack<int> popStk;   
+
+  
+    void transfer() {
+        if (popStk.empty()) {
+            while (!pushStk.empty()) {
+                popStk.push(pushStk.top());
+                pushStk.pop();
+            }
+        }
+    }
+
+public:
+    MyQueue() {}
+
+    void push(int x) {
+        pushStk.push(x);   
+    }
+
+    int pop() {
+        transfer();         
+        int val = popStk.top();
+        popStk.pop();
+        return val;
+    }
+
+    int peek() {
+        transfer();       
+        return popStk.top();
+    }
+
+    bool empty() {
+        return pushStk.empty() && popStk.empty();
+    }
+};
