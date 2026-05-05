@@ -1,0 +1,45 @@
+class MyCircularQueue {
+private:
+    vector<int> data;
+    int head;   
+    int tail;   
+    int size;   
+    int cap;    
+
+public:
+    MyCircularQueue(int k) {
+        data.resize(k);
+        head = 0;
+        tail = 0;
+        size = 0;
+        cap  = k;
+    }
+
+    bool enQueue(int value) {
+        if (isFull()) return false;
+        data[tail] = value;
+        tail = (tail + 1) % cap;  // 繞回
+        size++;
+        return true;
+    }
+
+    bool deQueue() {
+        if (isEmpty()) return false;
+        head = (head + 1) % cap;  // 再次地繞回
+        size--;
+        return true;
+    }
+
+    int Front() {
+        if (isEmpty()) return -1;
+        return data[head];
+    }
+
+    int Rear() {
+        if (isEmpty()) return -1;
+        return data[(head + size - 1) % cap];  // 最後一個位置
+    }
+
+    bool isEmpty() { return size == 0; }
+    bool isFull()  { return size == cap; }
+};
