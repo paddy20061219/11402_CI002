@@ -1,0 +1,49 @@
+class MyCircularDeque {
+private:
+    vector<int> data;
+    int head, sz, cap;
+
+    int tail() { return (head + sz - 1 + cap) % cap; }
+
+public:
+    MyCircularDeque(int k) : data(k), head(0), sz(0), cap(k) {}
+
+    bool insertFront(int value) {
+        if (isFull()) return false;
+        head = (head - 1 + cap) % cap;  // head前移
+        data[head] = value;
+        sz++;
+        return true;
+    }
+
+    bool insertLast(int value) {
+        if (isFull()) return false;
+        data[(head + sz) % cap] = value;  
+        sz++;
+        return true;
+    }
+
+    bool deleteFront() {
+        if (isEmpty()) return false;
+        head = (head + 1) % cap;  // head後移
+        sz--;
+        return true;
+    }
+
+    bool deleteLast() {
+        if (isEmpty()) return false;
+        sz--;   
+        return true;
+    }
+
+    int getFront() {
+        return isEmpty() ? -1 : data[head];
+    }
+
+    int getRear() {
+        return isEmpty() ? -1 : data[tail()];
+    }
+
+    bool isEmpty() { return sz == 0; }
+    bool isFull()  { return sz == cap; }
+};
